@@ -171,4 +171,4 @@ Este proyecto se desarrolla bajo principios de ciencia abierta y software libre,
 
 ---
 
-*Última actualización: Enero 2025*
+*Última actualización: Octubre 2025*
