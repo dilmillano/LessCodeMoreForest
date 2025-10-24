@@ -2,7 +2,7 @@
 
 ## Segmentación automática de parches de bosque y extracción de métricas espaciales para monitoreo continuo libre
 
-**Por** David Valbuena - Gaviria and [Diana Millan - Orduz](https://github.com/dilmillano) - Investigadores independientes
+**Por** David Valbuena - Gaviria y [Diana Millan - Orduz](https://github.com/dilmillano) - Investigadores independientes
 
 ---
 
@@ -20,7 +20,7 @@ El flujo metodológico combina herramientas de QGIS y Google Colab (Python) en t
 
 **Postprocesamiento (Colab)** – cálculo de métricas espaciales de los parches identificados para evaluar su estructura y cambios temporales en la cobertura forestal.
 
-Los resultados muestran una precisión promedio superior a 60 % en IoU y un F1-Score mayor a 0.75, lo que evidencia un equilibrio entre precisión y sensibilidad del modelo en la detección de bosques. Esta metodología reduce significativamente los tiempos de procesamiento frente a enfoques manuales y es escalable y adaptable a distintos ecosistemas del país.
+Los resultados muestran un IoU entre 0.66 y 0.73, muestra una coincidencia espacial cercana al 70 % con el bosque real. Un F1-score (Dice) de 79% evidencia un buen equilibrio entre precisión y sensibilidad. Y una zona de rendimiento estable entre umbrales de 0.3 y 0.7. Esta metodología reduce significativamente los tiempos de procesamiento frente a enfoques manuales y es escalable y adaptable a distintos ecosistemas del país.
 
 Además, el enfoque se construyó utilizando software libre y herramientas abiertas, lo que facilita su replicación en contextos técnicos, institucionales o comunitarios con recursos limitados.
 
@@ -33,13 +33,15 @@ Además, el enfoque se construyó utilizando software libre y herramientas abier
 Esta etapa se desarrolla principalmente en **QGIS** para la construcción de etiquetas de entrenamiento y depuración geométrica de polígonos de bosque.
 
 **Archivos principales:**
+- `data/descargar_imagenes_sentinel.js` - Script de Google Earth Engine para descarga de imágenes Sentinel-2
 - `1_guardar_labels.ipynb` - Procesamiento de etiquetas y generación de tiles para entrenamiento
 
 **Proceso:**
-1. **Etiquetado manual en QGIS**: Creación de polígonos de bosque mediante interpretación visual de imágenes satelitales
-2. **Generación de tiles**: El notebook `1_guardar_labels.ipynb` procesa las etiquetas vectoriales y genera tiles de entrenamiento con sus respectivas máscaras
-3. **Validación geométrica**: Depuración de polígonos y corrección de errores topológicos
-4. **Exportación**: Conversión a formatos compatibles con el modelo de deep learning
+1. **Descarga de imágenes**: Ejecutar el script `data/descargar_imagenes_sentinel.js` en Google Earth Engine para obtener imágenes Sentinel-2 compuestas y libres de nubes
+2. **Etiquetado manual en QGIS**: Creación de polígonos de bosque mediante interpretación visual de imágenes satelitales
+3. **Generación de tiles**: El notebook `1_guardar_labels.ipynb` procesa las etiquetas vectoriales y genera tiles de entrenamiento con sus respectivas máscaras
+4. **Validación geométrica**: Depuración de polígonos y corrección de errores topológicos
+5. **Exportación**: Conversión a formatos compatibles con el modelo de deep learning
 
 ### 🤖 MODELADO
 
@@ -57,8 +59,9 @@ Esta etapa se desarrolla en **Google Colab** utilizando el modelo Satlas SwinB +
 - **Procesamiento**: Inferencia por tiles con stride de 512x512 píxeles
 
 **Resultados obtenidos:**
-- Precisión promedio > 60% en IoU
-- F1-Score > 0.75
+- IoU entre 0.66 y 0.73 (coincidencia espacial ~70%)
+- F1-score (Dice) de 79%
+- Zona de rendimiento estable entre umbrales de 0.3 y 0.7
 - Tiempo de procesamiento: ~10 minutos para 2223 tiles (GPU Tesla T4)
 
 ### 📊 POSTPROCESAMIENTO
@@ -75,6 +78,16 @@ Esta etapa calcula métricas espaciales de los parches identificados para evalua
 - Análisis de fragmentación del paisaje
 - Evaluación de conectividad ecológica
 - Planificación de restauración
+
+---
+
+## 📊 Datos
+
+### Imágenes
+Imágenes satelitales y raster limpios de Cundinamarca Sentinel-2: [Descargar imágenes](https://drive.google.com/drive/folders/14QhNHqLA7MlWq83VWmBovv_wzM7ezhCy?usp=sharing)
+
+### Labels
+Etiquetas de entrenamiento en formato GeoJSON: [Descargar labels](https://drive.google.com/drive/folders/1WVv6DqZmXmookblPRJU8RvjyvPVXuU92?usp=sharing)
 
 ---
 
@@ -112,9 +125,9 @@ pip install tqdm numpy
 ## 📈 Resultados y validación
 
 ### Métricas de rendimiento
-- **IoU (Intersection over Union)**: > 60%
-- **F1-Score**: > 0.75
-- **Precisión**: Balanceada entre detección y falsos positivos
+- **IoU (Intersection over Union)**: 0.66-0.73 (coincidencia espacial ~70%)
+- **F1-Score (Dice)**: 79%
+- **Zona de rendimiento estable**: Entre umbrales de 0.3 y 0.7
 - **Tiempo de procesamiento**: Reducción significativa vs. métodos manuales
 
 ### Casos de estudio
@@ -144,8 +157,8 @@ Este proyecto se desarrolla bajo principios de ciencia abierta y software libre,
 
 ## 📞 Contacto
 
-- **David Valbuena - Gaviria**: [Perfil académico]
-- **Diana Millan - Orduz**: [dilmillano](https://github.com/dilmillano)
+- **David Valbuena - Gaviria**: dlvalbuenag@udistrital.edu.co
+- **Diana Millan - Orduz**: millanorduzdiana@gmail.com
 
 ---
 

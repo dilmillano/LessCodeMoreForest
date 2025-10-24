@@ -1,0 +1,7 @@
+# Enlaces a los datos del proyecto Less Code More Forest
+
+## Imágenes satelitales
+https://drive.google.com/drive/folders/14QhNHqLA7MlWq83VWmBovv_wzM7ezhCy?usp=sharing
+
+## Labels de entrenamiento
+https://drive.google.com/drive/folders/1WVv6DqZmXmookblPRJU8RvjyvPVXuU92?usp=sharing
